@@ -5,7 +5,7 @@ public class Parameter {
     String text;
     Currency currency;
     DateTime dateTime;
-    Image image;
-    Document document;
-    Video video;
+    Media image;
+    Media document;
+    Media video;
 }
