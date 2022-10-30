@@ -12,5 +12,5 @@ public class Interactive {
     Body body;
     Footer footer;
     Header header;
-    Type type;
+    String type;
 }

@@ -11,11 +11,11 @@ import com.vishal.wacaj.model.webhook.Payload;
 @RestController
 public class WacajController {
     @PostMapping("/webhooks")
-    public String hook(@RequestBody Payload payload) {
+    public Payload hook(@RequestBody Payload payload) {
         // todo
         // handle all the cases here for different types of webhook body
         
-        return payload.toString();
+        return payload;
     }
 
     @GetMapping("/webhooks")
