@@ -1,17 +1,17 @@
 package com.vishal.wacaj.controller;
 
-import java.util.Map;
-
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.vishal.wacaj.model.webhook.Payload;
+
 @RestController
 public class WacajController {
     @PostMapping("/webhooks")
-    public String hook(@RequestBody Map<String, Object> payload) {
+    public String hook(@RequestBody Payload payload) {
         // todo
         // handle all the cases here for different types of webhook body
         
