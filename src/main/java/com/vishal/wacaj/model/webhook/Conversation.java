@@ -1,6 +1,6 @@
 package com.vishal.wacaj.model.webhook;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -12,7 +12,7 @@ import lombok.ToString;
 public class Conversation {
     String id;
     Origin origin;
-    @JsonAlias("expiration_timestamp")
+    @JsonProperty("expiration_timestamp")
     String expirationTimestamp;
 
 }

@@ -1,6 +1,6 @@
 package com.vishal.wacaj.model.webhook;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -10,8 +10,8 @@ import lombok.ToString;
 @Getter
 @Setter
 public class ReferredProduct {
-    @JsonAlias("catalog_id")
+    @JsonProperty("catalog_id")
     String catalogId;
-    @JsonAlias("product_ratailer_id")
+    @JsonProperty("product_ratailer_id")
     String productRetailerId;
 }

@@ -1,6 +1,6 @@
 package com.vishal.wacaj.model.message;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -13,7 +13,7 @@ public class Parameter {
     String type;
     String text;
     Currency currency;
-    @JsonAlias("date_time")
+    @JsonProperty("date_time")
     DateTime dateTime;
     Media image;
     Media document;

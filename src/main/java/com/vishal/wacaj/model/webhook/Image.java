@@ -1,6 +1,6 @@
 package com.vishal.wacaj.model.webhook;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -13,6 +13,6 @@ public class Image {
     String caption;
     String sha256;
     String id;
-    @JsonAlias("mime_type")
+    @JsonProperty("mime_type")
     String mimeType;
 }

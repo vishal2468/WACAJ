@@ -3,7 +3,7 @@ package com.vishal.wacaj.model.message;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -20,11 +20,11 @@ public class Message {
     Media image;
     Interactive interactive;
     Location location;
-    @JsonAlias("messaging_product")
+    @JsonProperty("messaging_product")
     String messagingProduct;
-    @JsonAlias("preview_url")
+    @JsonProperty("preview_url")
     boolean previewUrl;
-    @JsonAlias("recipient_type")
+    @JsonProperty("recipient_type")
     String recepientType;
     String status;
     Media sticker;

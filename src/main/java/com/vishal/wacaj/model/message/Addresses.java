@@ -1,6 +1,6 @@
 package com.vishal.wacaj.model.message;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -14,7 +14,7 @@ public class Addresses {
     String city;
     String state;
     String country;
-    @JsonAlias("country_code")
+    @JsonProperty("country_code")
     String countryCode;
     String type;
     String zip;

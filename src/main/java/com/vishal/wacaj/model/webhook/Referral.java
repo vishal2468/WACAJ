@@ -1,6 +1,6 @@
 package com.vishal.wacaj.model.webhook;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -10,19 +10,19 @@ import lombok.ToString;
 @Getter
 @Setter
 public class Referral {
-    @JsonAlias("source_url")
+    @JsonProperty("source_url")
     String sourceUrl;
-    @JsonAlias("source_type")
+    @JsonProperty("source_type")
     String sourceType;
-    @JsonAlias("source_id")
+    @JsonProperty("source_id")
     String sourceId;
     String headline;
     String body;
-    @JsonAlias("media_type")
+    @JsonProperty("media_type")
     String mediaType;
-    @JsonAlias("video_url")
+    @JsonProperty("video_url")
     String videoUrl;
-    @JsonAlias("thumbnail_url")
+    @JsonProperty("thumbnail_url")
     String thumbnailUrl;
 
 }

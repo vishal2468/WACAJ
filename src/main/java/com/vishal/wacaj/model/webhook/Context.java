@@ -1,6 +1,6 @@
 package com.vishal.wacaj.model.webhook;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -11,10 +11,10 @@ import lombok.ToString;
 @Setter
 public class Context {
     boolean forwarded;
-    @JsonAlias("frequently_forwarded")
+    @JsonProperty("frequently_forwarded")
     boolean frequentlyForwarded;
     String from;
     String id;
-    @JsonAlias("referred_product")
+    @JsonProperty("referred_product")
     ReferredProduct referredProduct;
 }

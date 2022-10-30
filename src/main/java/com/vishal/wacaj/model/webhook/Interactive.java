@@ -1,6 +1,6 @@
 package com.vishal.wacaj.model.webhook;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -11,8 +11,8 @@ import lombok.ToString;
 @Setter
 public class Interactive {
     String type;
-    @JsonAlias("button_reply")
+    @JsonProperty("button_reply")
     ButtonReply buttonReply;
-    @JsonAlias("list_reply")
+    @JsonProperty("list_reply")
     ListReply listReply;
 }

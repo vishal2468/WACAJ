@@ -1,6 +1,6 @@
 package com.vishal.wacaj.model.webhook;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -13,7 +13,7 @@ public class Statuses {
     Conversation conversation;
     String id;
     Pricing pricing;
-    @JsonAlias("recepient_id")
+    @JsonProperty("recepient_id")
     String recepientId;
     String status;
     String timestamp;
