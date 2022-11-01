@@ -19,5 +19,5 @@ public class Value {
     String messagingProduct;
     List<Messages> messages=new ArrayList<>();
     Metadata metadata;
-    Statuses statuses;
+    List<Statuses> statuses;
 }
