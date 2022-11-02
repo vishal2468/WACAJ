@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.vishal.wacaj.model.webhook.Messages;
 import com.vishal.wacaj.model.webhook.Payload;
 import com.vishal.wacaj.model.webhook.Statuses;
+import com.vishal.wacaj.utility.SendMessage;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -23,7 +24,7 @@ public class WacajController {
      * @return
      */
     @PostMapping("/webhooks")
-    public Object hook(@RequestBody Payload payload) {
+    public Object handleIncomingMessages(@RequestBody Payload payload) {
         // todo
         // handle all the cases here for different types of webhook body
         String changedField=payload.getEntry().get(0).getChanges().get(0).getField();
@@ -98,5 +99,10 @@ public class WacajController {
         if (verifyToken.equals("meatyhamhock") && (mode.equals("subscribe")))
             return Integer.parseInt(challenge);
         return -1;
+    }
+    @GetMapping("/sendmessage")
+    public String handleSendTemplateMessageRequest(){
+        SendMessage sendMessage=new SendMessage();
+        return sendMessage.sendTemplateMessage("Hi this is a sample text message", "101433876111052", "918102988387", false, "EAAGqoEm7JIIBAOpMrdfPQJ6cXk56UX390N4ZABN2S7hYsPLRWmtkGHlF9spRSYQCk9BTtajmQVSI5SM19EjzrLtsQLIcBO2MqRTGhZBmfV6ifj8ZCTThBJZCfCr6sM02OU2Ixcd3bAnJ6xEI93g894qEa2S6P2Hkd41e8ZAxB0frQItTOog6dKic7BugoZBoqLViwC54VtCgZDZD");
     }
 }

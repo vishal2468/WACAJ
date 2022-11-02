@@ -12,6 +12,5 @@ import lombok.ToString;
 public class Template {
     String name;
     Language language;
-    String namespace;
     List<Component> components=new ArrayList<>();
 }
