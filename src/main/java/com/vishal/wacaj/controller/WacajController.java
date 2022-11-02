@@ -103,6 +103,6 @@ public class WacajController {
     @GetMapping("/sendmessage")
     public String handleSendTemplateMessageRequest(){
         SendMessage sendMessage=new SendMessage();
-        return sendMessage.sendTemplateMessage("Hi this is a sample text message", "101433876111052", "918102988387", false, "EAAGqoEm7JIIBAOpMrdfPQJ6cXk56UX390N4ZABN2S7hYsPLRWmtkGHlF9spRSYQCk9BTtajmQVSI5SM19EjzrLtsQLIcBO2MqRTGhZBmfV6ifj8ZCTThBJZCfCr6sM02OU2Ixcd3bAnJ6xEI93g894qEa2S6P2Hkd41e8ZAxB0frQItTOog6dKic7BugoZBoqLViwC54VtCgZDZD");
+        return sendMessage.sendTemplateMessage( "101433876111052", "918102988387", false, "EAAGqoEm7JIIBAOpMrdfPQJ6cXk56UX390N4ZABN2S7hYsPLRWmtkGHlF9spRSYQCk9BTtajmQVSI5SM19EjzrLtsQLIcBO2MqRTGhZBmfV6ifj8ZCTThBJZCfCr6sM02OU2Ixcd3bAnJ6xEI93g894qEa2S6P2Hkd41e8ZAxB0frQItTOog6dKic7BugoZBoqLViwC54VtCgZDZD");
     }
 }
