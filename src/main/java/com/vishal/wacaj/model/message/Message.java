@@ -25,7 +25,7 @@ public class Message {
     @JsonProperty("preview_url")
     boolean previewUrl;
     @JsonProperty("recipient_type")
-    String recepientType;
+    String recipientType;
     String status;
     Media sticker;
     Template template;

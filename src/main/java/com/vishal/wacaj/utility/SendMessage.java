@@ -11,25 +11,12 @@ import org.springframework.web.client.RestTemplate;
 import com.vishal.wacaj.model.message.Language;
 import com.vishal.wacaj.model.message.Message;
 import com.vishal.wacaj.model.message.Template;
+import com.vishal.wacaj.model.message.Text;
 
 public class SendMessage {
     @Autowired
     RestTemplate restTemplate=new RestTemplate();
     public String sendTemplateMessage(String fromPhoneNumberId, String recipientWaId,String authToken) {
-        /*
-         * Sends a text message to a WhatsApp user
-         * Args:
-         * message[str]: Message to be sent to the user
-         * recipient_id[str]: Phone number of the user with country code wihout +
-         * recipient_type[str]: Type of the recipient, either individual or group
-         * preview_url[bool]: Whether to send a preview url or not
-         * Example:
-         * 
-         * >>> from whatsapp import WhatsApp
-         * >>> whatsapp = WhatsApp(token, phone_number_id)
-         * >>> whatsapp.send_message("Hello World", "5511999999999")
-         * >>> whatsapp.send_message("Hello World", "5511999999999", preview_url=False)
-         */
         HttpHeaders httpHeaders=new HttpHeaders();
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);
         httpHeaders.setBearerAuth(authToken);
@@ -47,4 +34,25 @@ public class SendMessage {
         String url=String.format("https://graph.facebook.com/v15.0/%s/messages", fromPhoneNumberId);
         return (restTemplate.exchange(url, HttpMethod.POST,requestEntity,String.class).getBody());
     }
+    public String sendTextMessage(String fromPhoneNumberId, String recipientWaId,String recipientType ,String messageString,String authToken) {
+        HttpHeaders httpHeaders=new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+        httpHeaders.setBearerAuth(authToken);
+
+        Message message=new Message();
+        message.setMessagingProduct("whatsapp");
+        message.setRecipientType(recipientType);
+        message.setTo(recipientWaId);
+        message.setType("text");
+        message.setText(new Text());
+        message.getText().setBody(messageString);
+        message.getText().setPreviewUrl(false);
+
+        
+
+        HttpEntity<Message> requestEntity=new HttpEntity<>(message,httpHeaders);
+        String url=String.format("https://graph.facebook.com/v15.0/%s/messages", fromPhoneNumberId);
+        return (restTemplate.exchange(url, HttpMethod.POST,requestEntity,String.class).getBody());
+    }
+
 }
