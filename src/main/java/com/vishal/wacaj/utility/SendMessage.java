@@ -15,7 +15,7 @@ import com.vishal.wacaj.model.message.Template;
 public class SendMessage {
     @Autowired
     RestTemplate restTemplate=new RestTemplate();
-    public String sendTemplateMessage(String fromPhoneNumberId, String recipientWaId, boolean previewUrl,String authToken) {
+    public String sendTemplateMessage(String fromPhoneNumberId, String recipientWaId,String authToken) {
         /*
          * Sends a text message to a WhatsApp user
          * Args:
