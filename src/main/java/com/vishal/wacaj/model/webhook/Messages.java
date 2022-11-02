@@ -28,5 +28,6 @@ public class Messages {
     SystemMessage system;
     Text text;
     String timestamp;
+    String type;
     Video video;
 }
