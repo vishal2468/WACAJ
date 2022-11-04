@@ -101,14 +101,14 @@ public class WacajController {
             return Integer.parseInt(challenge);
         return -1;
     }
-    @GetMapping("/sendtemplatemessage")
+    @GetMapping("/sendmessage/template")
     public String handleSendTemplateMessageRequest(){
         SendMessage sendMessage=new SendMessage();
-        return sendMessage.sendTemplateMessage( "101433876111052", "918102988387", "EAAGqoEm7JIIBAOpMrdfPQJ6cXk56UX390N4ZABN2S7hYsPLRWmtkGHlF9spRSYQCk9BTtajmQVSI5SM19EjzrLtsQLIcBO2MqRTGhZBmfV6ifj8ZCTThBJZCfCr6sM02OU2Ixcd3bAnJ6xEI93g894qEa2S6P2Hkd41e8ZAxB0frQItTOog6dKic7BugoZBoqLViwC54VtCgZDZD");
+        return sendMessage.sendTemplateMessage( "101433876111052", "918102988387", "EAAGqoEm7JIIBAFoLtwCk23qnTMBn28e1MkJTeitpw1117opIMGEyEbvwATdCXifePnsyN93ALnZAPRETcPaKZAi832XUFSqsZAln0EIe4luZBPYBzjjEUpYgLUdUunNDb4AQ7FZAZCUUDLghGLhsrZBZBQxvursAo40EZCNtIuuFnKfZAz6aCvYzEzWtaaDQmJ9eh7alVXyvv4BQZDZD");
     }
-    @GetMapping("/sendtextmessage/{message}")
+    @GetMapping("/sendmessage/text/{message}")
     public String handleSendTextMessageRequest(@PathVariable String message){
         SendMessage sendMessage=new SendMessage();
-        return sendMessage.sendTextMessage( "101433876111052", "918102988387","individual",message, "EAAGqoEm7JIIBAOpMrdfPQJ6cXk56UX390N4ZABN2S7hYsPLRWmtkGHlF9spRSYQCk9BTtajmQVSI5SM19EjzrLtsQLIcBO2MqRTGhZBmfV6ifj8ZCTThBJZCfCr6sM02OU2Ixcd3bAnJ6xEI93g894qEa2S6P2Hkd41e8ZAxB0frQItTOog6dKic7BugoZBoqLViwC54VtCgZDZD");
+        return sendMessage.sendTextMessage( "101433876111052", "918102988387","individual",message, "EAAGqoEm7JIIBAFoLtwCk23qnTMBn28e1MkJTeitpw1117opIMGEyEbvwATdCXifePnsyN93ALnZAPRETcPaKZAi832XUFSqsZAln0EIe4luZBPYBzjjEUpYgLUdUunNDb4AQ7FZAZCUUDLghGLhsrZBZBQxvursAo40EZCNtIuuFnKfZAz6aCvYzEzWtaaDQmJ9eh7alVXyvv4BQZDZD");
     }
 }
