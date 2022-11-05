@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.vishal.wacaj.model.webhook.Messages;
 import com.vishal.wacaj.model.webhook.Payload;
 import com.vishal.wacaj.model.webhook.Statuses;
-import com.vishal.wacaj.utility.SendMessage;
+import com.vishal.wacaj.service.SendMessage;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -104,11 +104,11 @@ public class WacajController {
     @GetMapping("/sendmessage/template")
     public String handleSendTemplateMessageRequest(){
         SendMessage sendMessage=new SendMessage();
-        return sendMessage.sendTemplateMessage( "101433876111052", "918102988387", "EAAGqoEm7JIIBAFoLtwCk23qnTMBn28e1MkJTeitpw1117opIMGEyEbvwATdCXifePnsyN93ALnZAPRETcPaKZAi832XUFSqsZAln0EIe4luZBPYBzjjEUpYgLUdUunNDb4AQ7FZAZCUUDLghGLhsrZBZBQxvursAo40EZCNtIuuFnKfZAz6aCvYzEzWtaaDQmJ9eh7alVXyvv4BQZDZD");
+        return sendMessage.sendTemplateMessage(  "918102988387");
     }
     @GetMapping("/sendmessage/text/{message}")
     public String handleSendTextMessageRequest(@PathVariable String message){
         SendMessage sendMessage=new SendMessage();
-        return sendMessage.sendTextMessage( "101433876111052", "918102988387","individual",message, "EAAGqoEm7JIIBAFoLtwCk23qnTMBn28e1MkJTeitpw1117opIMGEyEbvwATdCXifePnsyN93ALnZAPRETcPaKZAi832XUFSqsZAln0EIe4luZBPYBzjjEUpYgLUdUunNDb4AQ7FZAZCUUDLghGLhsrZBZBQxvursAo40EZCNtIuuFnKfZAz6aCvYzEzWtaaDQmJ9eh7alVXyvv4BQZDZD");
+        return sendMessage.sendTextMessage( "918102988387","individual",message);
     }
 }
