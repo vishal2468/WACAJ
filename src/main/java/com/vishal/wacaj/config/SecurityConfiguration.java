@@ -1,4 +1,4 @@
-package com.vishal.wacaj;
+package com.vishal.wacaj.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

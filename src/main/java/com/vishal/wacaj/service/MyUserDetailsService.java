@@ -1,4 +1,4 @@
-package com.vishal.wacaj;
+package com.vishal.wacaj.service;
 
 import java.util.Optional;
 
@@ -7,6 +7,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import com.vishal.wacaj.model.security.MyUserDetails;
+import com.vishal.wacaj.model.security.User;
+import com.vishal.wacaj.repository.UserRepository;
 
 @Service
 public class MyUserDetailsService implements UserDetailsService{

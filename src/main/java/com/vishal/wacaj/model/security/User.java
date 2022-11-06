@@ -1,4 +1,4 @@
-package com.vishal.wacaj;
+package com.vishal.wacaj.model.security;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;

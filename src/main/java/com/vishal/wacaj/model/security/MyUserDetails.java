@@ -1,4 +1,4 @@
-package com.vishal.wacaj;
+package com.vishal.wacaj.model.security;
 
 import java.util.Arrays;
 import java.util.Collection;
