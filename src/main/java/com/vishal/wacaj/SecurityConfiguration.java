@@ -18,7 +18,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        // TODO Auto-generated method stub
         auth.userDetailsService(userDetailsService);
     }
 
@@ -27,6 +26,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
         http.authorizeRequests()
             .antMatchers("/admin").hasRole("ADMIN")
             .antMatchers("/user").hasAnyRole("USER","ADMIN")
+            .antMatchers("/sendmessage/*").hasAnyRole("USER","ADMIN")
+            .antMatchers("/webhooks").permitAll()
             .antMatchers("/").permitAll()
             .and().formLogin();
     }
