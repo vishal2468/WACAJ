@@ -8,7 +8,7 @@ import lombok.ToString;
 @Getter
 @Setter
 public class Button {
-    String type;
+    String type;//only supports reply
     String title;
     String id;
 }
