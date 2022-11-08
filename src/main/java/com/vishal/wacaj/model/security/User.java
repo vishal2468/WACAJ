@@ -19,7 +19,6 @@ public class User {
     @Field("access_token")
     private final String accessToken;
 
-    
     @PersistenceCreator
     public User(int id, String userName, String password, boolean active, String roles, String fromPhoneNumberId,
             String accessToken) {
@@ -32,6 +31,14 @@ public class User {
         this.accessToken = accessToken;
     }
 
+    public String getFromPhoneNumberId() {
+        return fromPhoneNumberId;
+    }
+
+    public String getAccessToken() {
+        return accessToken;
+    }
+    
     public int getId() {
         return id;
     }

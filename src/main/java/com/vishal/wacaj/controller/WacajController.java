@@ -2,7 +2,7 @@ package com.vishal.wacaj.controller;
 
 import java.util.List;
 
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,6 +24,9 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @Slf4j
 public class WacajController {
+
+    @Autowired
+    SendMessage sendMessage;
     /**
      * @param payload
      * @return
@@ -106,14 +109,12 @@ public class WacajController {
         return -1;
     }
     @GetMapping("/sendmessage/template")
-    public String handleSendTemplateMessageRequest(){
-        SendMessage sendMessage=new SendMessage();
-        return sendMessage.sendTemplateMessage(  "918102988387");
+    public String handleSendTemplateMessageRequest(@LoggedInUser MyUserDetails userDetails){
+        return sendMessage.sendTemplateMessage(  "918102988387",userDetails.getUser());
     }
     @GetMapping("/sendmessage/text/{message}")
-    public String handleSendTextMessageRequest(@PathVariable String message){
-        SendMessage sendMessage=new SendMessage();
-        return sendMessage.sendTextMessage( "918102988387","individual",message);
+    public String handleSendTextMessageRequest(@PathVariable String message,@LoggedInUser MyUserDetails userDetails){
+        return sendMessage.sendTextMessage( "918102988387",message,userDetails.getUser());
     }
     @GetMapping("/")
     public String home(){
@@ -122,11 +123,6 @@ public class WacajController {
     }
     @GetMapping("/user")
     public User user(@LoggedInUser MyUserDetails userDetails){
-        /* 
-         * SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-         * The above returns an Object type object with all the MyUserDetails fileds.
-         * @LoggedInUser is not a inbuilt Annotation.
-         */
         return userDetails.getUser();
     }
     @GetMapping("/admin")

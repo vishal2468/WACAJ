@@ -13,6 +13,7 @@ import com.vishal.wacaj.model.message.Language;
 import com.vishal.wacaj.model.message.Message;
 import com.vishal.wacaj.model.message.Template;
 import com.vishal.wacaj.model.message.Text;
+import com.vishal.wacaj.model.security.User;
 
 @Service
 public class SendMessage {
@@ -20,11 +21,10 @@ public class SendMessage {
     @Autowired
     RestTemplate restTemplate = new RestTemplate();
 
-    public String sendTemplateMessage(String recipientWaId) {
+    public String sendTemplateMessage(String recipientWaId, User user) {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);
         httpHeaders.setBearerAuth(Constants.ACCESS_TOKEN);
-
         Message message = new Message();
         message.setMessagingProduct("whatsapp");
         message.setType("template");
@@ -35,19 +35,19 @@ public class SendMessage {
         message.setTo(recipientWaId);
         HttpEntity<Message> requestEntity = new HttpEntity<>(message, httpHeaders);
         String url = String.format("https://graph.facebook.com/%s/%s/messages", Constants.VERSION,
-                Constants.FROM_PHONE_NUMBER_ID);
+                user.getFromPhoneNumberId());
         return (restTemplate.exchange(url, HttpMethod.POST, requestEntity, String.class).getBody());
     }
 
-    public String sendTextMessage(String recipientWaId, String recipientType,
-            String messageString) {
+    public String sendTextMessage(String recipientWaId,
+            String messageString, User user) {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);
-        httpHeaders.setBearerAuth(Constants.ACCESS_TOKEN);
+        httpHeaders.setBearerAuth(user.getAccessToken());
 
         Message message = new Message();
         message.setMessagingProduct("whatsapp");
-        message.setRecipientType(recipientType);
+        message.setRecipientType(Constants.RECEPIENT_INDIVIDUAL);
         message.setTo(recipientWaId);
         message.setType("text");
         message.setText(new Text());
@@ -55,8 +55,7 @@ public class SendMessage {
         message.getText().setPreviewUrl(false);
         HttpEntity<Message> requestEntity = new HttpEntity<>(message, httpHeaders);
         String url = String.format("https://graph.facebook.com/%s/%s/messages", Constants.VERSION,
-                Constants.FROM_PHONE_NUMBER_ID);
+                user.getFromPhoneNumberId());
         return (restTemplate.exchange(url, HttpMethod.POST, requestEntity, String.class).getBody());
     }
-
 }
