@@ -12,3 +12,16 @@ Features that I want the project to have:
 
 I would also like to build a CI-CD pipeline for auto build and deployment.
 The application should be hosted on AWS.
+
+Already done:
+All the user data shifted to a cloud mongo db.
+The application is hosted on cloud with auto deployment on for every commit.
+The spring security has been added
+
+To Do:
+Add Embedded signups for BSP so as to onboard businesses easily
+Get the principle in the controller so as to make code very elegent.
+Add list of customers page for the businesses from where they can send messages.
+Upgrade to the latest spring security features.
+Systems design.
+Add frontend.
