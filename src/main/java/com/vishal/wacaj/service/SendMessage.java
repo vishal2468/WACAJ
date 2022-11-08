@@ -24,7 +24,7 @@ public class SendMessage {
     public String sendTemplateMessage(String recipientWaId, User user) {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);
-        httpHeaders.setBearerAuth(Constants.ACCESS_TOKEN);
+        httpHeaders.setBearerAuth(user.getAccessToken());
         Message message = new Message();
         message.setMessagingProduct("whatsapp");
         message.setType("template");

@@ -15,7 +15,7 @@ public class MyUserDetails implements UserDetails {
     private String password;
     private boolean active;
     private List<GrantedAuthority> authorities;
-    private User user;
+    private transient User user;
 
     public MyUserDetails(User user) {
         this.userName = user.getUserName();
