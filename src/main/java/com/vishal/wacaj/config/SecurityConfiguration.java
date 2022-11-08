@@ -11,7 +11,7 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @EnableWebSecurity
-public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     UserDetailsService userDetailsService;
@@ -24,16 +24,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-            .antMatchers("/admin").hasRole("ADMIN")
-            .antMatchers("/user").hasAnyRole("USER","ADMIN")
-            .antMatchers("/sendmessage/*").hasAnyRole("USER","ADMIN")
-            .antMatchers("/sendmessage/*/*").hasAnyRole("USER","ADMIN")
-            .antMatchers("/webhooks").permitAll()
-            .antMatchers("/").permitAll()
-            .and().formLogin();
+                .antMatchers("/admin").hasRole("ADMIN")
+                .antMatchers("/user").hasAnyRole("USER", "ADMIN")
+                .antMatchers("/sendmessage/*").hasAnyRole("USER", "ADMIN")
+                .antMatchers("/sendmessage/*/*").hasAnyRole("USER", "ADMIN")
+                .antMatchers("/webhooks").permitAll()
+                .antMatchers("/").permitAll()
+                .and().formLogin();
     }
+
     @Bean
-    public PasswordEncoder getPasswordEncoder(){
+    public PasswordEncoder getPasswordEncoder() {
         return NoOpPasswordEncoder.getInstance();
     }
 }

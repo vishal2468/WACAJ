@@ -2,6 +2,7 @@ package com.vishal.wacaj.controller;
 
 import java.util.List;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.vishal.wacaj.config.LoggedInUser;
+import com.vishal.wacaj.model.security.MyUserDetails;
+import com.vishal.wacaj.model.security.User;
 import com.vishal.wacaj.model.webhook.Messages;
 import com.vishal.wacaj.model.webhook.Payload;
 import com.vishal.wacaj.model.webhook.Statuses;
@@ -113,11 +117,17 @@ public class WacajController {
     }
     @GetMapping("/")
     public String home(){
-        return "<h1>home</h1>";
+        
+        return "<h1>Hello</h1>";
     }
     @GetMapping("/user")
-    public String user(){
-        return "<h1>user</h1>";
+    public User user(@LoggedInUser MyUserDetails userDetails){
+        /* 
+         * SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+         * The above returns an Object type object with all the MyUserDetails fileds.
+         * @LoggedInUser is not a inbuilt Annotation.
+         */
+        return userDetails.getUser();
     }
     @GetMapping("/admin")
     public String admin(){
