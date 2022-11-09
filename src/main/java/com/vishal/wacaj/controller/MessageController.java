@@ -23,7 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @Slf4j
-public class WacajController {
+public class MessageController {
 
     @Autowired
     SendMessage sendMessage;

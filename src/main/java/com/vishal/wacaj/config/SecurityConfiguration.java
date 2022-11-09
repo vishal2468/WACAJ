@@ -29,6 +29,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/sendmessage/*").hasAnyRole("USER", "ADMIN")
                 .antMatchers("/sendmessage/*/*").hasAnyRole("USER", "ADMIN")
                 .antMatchers("/webhooks").permitAll()
+                .antMatchers("/customer").hasAnyRole("USER", "ADMIN")
+                .antMatchers("/customer/*").hasAnyRole("USER", "ADMIN")
                 .antMatchers("/").permitAll()
                 .and().formLogin();
     }
