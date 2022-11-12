@@ -26,7 +26,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/admin").hasRole("ADMIN")
                 .antMatchers("/user").hasAnyRole("USER", "ADMIN")
-                .antMatchers("/sendmessage/*").hasAnyRole("USER", "ADMIN")
+                .antMatchers("/sendmessage").hasAnyRole("USER", "ADMIN")
                 .antMatchers("/sendmessage/*/*").hasAnyRole("USER", "ADMIN")
                 .antMatchers("/webhooks").permitAll()
                 .antMatchers("/customer").hasAnyRole("USER", "ADMIN")
