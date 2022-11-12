@@ -25,3 +25,6 @@ Add list of customers page for the businesses from where they can send messages.
 Upgrade to the latest spring security features.
 Systems design.
 Add frontend.
+
+
+previewUrl should be set true if we want a preview for the url to be present.

@@ -11,6 +11,5 @@ public class Media {
     String id;
     String link;
     String caption;
-    String filename;
-    String provider;
+    // String filename;  use only with a document media
 }

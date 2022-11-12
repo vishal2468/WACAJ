@@ -60,7 +60,6 @@ public class SendMessage {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);
         httpHeaders.setBearerAuth(user.getAccessToken());
-
         message.setTo(recipientWaId);
         HttpEntity<Message> requestEntity = new HttpEntity<>(message, httpHeaders);
         String url = String.format("https://graph.facebook.com/%s/%s/messages", Constants.VERSION,

@@ -28,6 +28,7 @@ public class Message {
     String recipientType;
     String status;
     Media sticker;
+    Reaction reaction;
     Template template;
     Text text;
     String to;
