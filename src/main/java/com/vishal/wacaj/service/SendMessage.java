@@ -1,5 +1,7 @@
 package com.vishal.wacaj.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -9,17 +11,20 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.vishal.wacaj.config.Constants;
+import com.vishal.wacaj.model.db.Customer;
 import com.vishal.wacaj.model.message.Language;
 import com.vishal.wacaj.model.message.Message;
 import com.vishal.wacaj.model.message.Template;
-import com.vishal.wacaj.model.message.Text;
 import com.vishal.wacaj.model.security.User;
+import com.vishal.wacaj.repository.CustomerRepository;
 
 @Service
 public class SendMessage {
 
     @Autowired
     RestTemplate restTemplate = new RestTemplate();
+    @Autowired
+    CustomerRepository customerRepository;
 
     public String sendTemplateMessage(String recipientWaId, User user) {
         HttpHeaders httpHeaders = new HttpHeaders();
@@ -39,23 +44,27 @@ public class SendMessage {
         return (restTemplate.exchange(url, HttpMethod.POST, requestEntity, String.class).getBody());
     }
 
-    public String sendTextMessage(String recipientWaId,
-            String messageString, User user) {
+    // send message by customer category or to all customers
+    public void sendMessageInBulk(String catergory, User user, Message message) {
+        List<Customer> customerList;
+        if (catergory != null)
+            customerList = customerRepository.findByBusinessIdAndCustomerCategory(user.getBusinessId(), catergory);
+        else
+            customerList = customerRepository.findByBusinessId(user.getBusinessId());
+        customerList.stream().forEach(customer -> sendTextMessage(customer.getRecipientWaId(), message, user));
+    }
+
+    // send message to a whatsapp id
+    public void sendTextMessage(String recipientWaId,
+            Message message, User user) {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);
         httpHeaders.setBearerAuth(user.getAccessToken());
 
-        Message message = new Message();
-        message.setMessagingProduct("whatsapp");
-        message.setRecipientType(Constants.RECEPIENT_INDIVIDUAL);
         message.setTo(recipientWaId);
-        message.setType("text");
-        message.setText(new Text());
-        message.getText().setBody(messageString);
-        message.getText().setPreviewUrl(false);
         HttpEntity<Message> requestEntity = new HttpEntity<>(message, httpHeaders);
         String url = String.format("https://graph.facebook.com/%s/%s/messages", Constants.VERSION,
                 user.getFromPhoneNumberId());
-        return (restTemplate.exchange(url, HttpMethod.POST, requestEntity, String.class).getBody());
+        restTemplate.exchange(url, HttpMethod.POST, requestEntity, String.class).getBody();
     }
 }

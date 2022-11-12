@@ -32,7 +32,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/customer").hasAnyRole("USER", "ADMIN")
                 .antMatchers("/customer/*").hasAnyRole("USER", "ADMIN")
                 .antMatchers("/").permitAll()
-                .and().formLogin();
+                .and().httpBasic().and().csrf().disable();
     }
 
     @Bean

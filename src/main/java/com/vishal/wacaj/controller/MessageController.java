@@ -4,15 +4,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.vishal.wacaj.config.LoggedInUser;
+import com.vishal.wacaj.model.message.Message;
 import com.vishal.wacaj.model.security.MyUserDetails;
-import com.vishal.wacaj.model.security.User;
 import com.vishal.wacaj.model.webhook.Messages;
 import com.vishal.wacaj.model.webhook.Payload;
 import com.vishal.wacaj.model.webhook.Statuses;
@@ -20,13 +19,13 @@ import com.vishal.wacaj.service.SendMessage;
 
 import lombok.extern.slf4j.Slf4j;
 
-
 @RestController
 @Slf4j
 public class MessageController {
 
     @Autowired
     SendMessage sendMessage;
+
     /**
      * @param payload
      * @return
@@ -35,66 +34,66 @@ public class MessageController {
     public Object handleIncomingMessages(@RequestBody Payload payload) {
         // todo
         // handle all the cases here for different types of webhook body
-        String changedField=payload.getEntry().get(0).getChanges().get(0).getField();
-        if(changedField.equals("messages")){
-            List<Messages> newMessage=payload.getEntry().get(0).getChanges().get(0).getValue().getMessages();
-            if(!newMessage.isEmpty()){// if not a new message then a status message
-                String messageType=payload.getEntry().get(0).getChanges().get(0).getValue().getMessages().get(0).getType();
-                switch(messageType){
-                    case("text"):{
+        String changedField = payload.getEntry().get(0).getChanges().get(0).getField();
+        if (changedField.equals("messages")) {
+            List<Messages> newMessage = payload.getEntry().get(0).getChanges().get(0).getValue().getMessages();
+            if (!newMessage.isEmpty()) {// if not a new message then a status message
+                String messageType = payload.getEntry().get(0).getChanges().get(0).getValue().getMessages().get(0)
+                        .getType();
+                switch (messageType) {
+                    case ("text"): {
                         log.info("Message type is : text");
                         // take apt actions
                         return payload.getEntry().get(0).getChanges().get(0).getValue().getMessages().get(0);
                     }
-                    case("button"):{
+                    case ("button"): {
                         log.info("Message type is : button");
                         // return message
                         break;
                     }
-                    case("document"):{
+                    case ("document"): {
                         log.info("Message type is : document");
                         // return message
                         break;
                     }
-                    case("image"):{
+                    case ("image"): {
                         log.info("Message type is : image");
                         break;
                     }
-                    case("interactive"):{
+                    case ("interactive"): {
                         log.info("Message type is : interactive");
                         break;
                     }
-                    case("order"):{
+                    case ("order"): {
                         log.info("Message type is : order");
                         break;
                     }
-                    case("sticker"):{
+                    case ("sticker"): {
                         log.info("Message type is : sticker");
                         break;
                     }
-                    case("video"):{
+                    case ("video"): {
                         log.info("Message type is : video");
                         break;
                     }
-                    case("system"):{
+                    case ("system"): {
                         log.info("Message type is : system");
                         break;
                     }
-                    case("unknown"):{
+                    case ("unknown"): {
                         log.info("Message type is : unknown");
                         break;
                     }
-                    default:{
+                    default: {
                         log.info("Message is not of any predefined types");
                         break;
                     }
                 }
                 return payload.getEntry().get(0).getChanges().get(0).getValue().getMessages().get(0);
-            }
-            else{
-                Statuses statuses=payload.getEntry().get(0).getChanges().get(0).getValue().getStatuses().get(0);
-                String status=statuses.getStatus();
-                log.info("Message" +status);
+            } else {
+                Statuses statuses = payload.getEntry().get(0).getChanges().get(0).getValue().getStatuses().get(0);
+                String status = statuses.getStatus();
+                log.info("Message" + status);
                 return payload.getEntry().get(0).getChanges().get(0).getValue().getStatuses().get(0);
             }
         }
@@ -108,25 +107,10 @@ public class MessageController {
             return Integer.parseInt(challenge);
         return -1;
     }
-    @GetMapping("/sendmessage/template")
-    public String handleSendTemplateMessageRequest(@LoggedInUser MyUserDetails userDetails){
-        return sendMessage.sendTemplateMessage(  "918102988387",userDetails.getUser());
-    }
-    @GetMapping("/sendmessage/text/{message}")
-    public String handleSendTextMessageRequest(@PathVariable String message,@LoggedInUser MyUserDetails userDetails){
-        return sendMessage.sendTextMessage( "918102988387",message,userDetails.getUser());
-    }
-    @GetMapping("/")
-    public String home(){
-        
-        return "<h1>Hello</h1>";
-    }
-    @GetMapping("/user")
-    public User user(@LoggedInUser MyUserDetails userDetails){
-        return userDetails.getUser();
-    }
-    @GetMapping("/admin")
-    public String admin(){
-        return "<h1>admin</h1>";
+
+    @PostMapping("/sendmessage")
+    public void handleSendTextMessageRequest(@RequestParam(value = "category", required = false) String category,
+            @LoggedInUser MyUserDetails userDetails, @RequestBody Message message) {
+        sendMessage.sendMessageInBulk(category, userDetails.getUser(), message);
     }
 }

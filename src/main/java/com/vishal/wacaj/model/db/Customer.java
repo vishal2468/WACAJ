@@ -15,4 +15,6 @@ public class Customer {
     private String customerCategory;
     @Field("business_id")
     private int businessId;
+    @Field("is_onboarded")
+    private Boolean isOnboarded;
 }
