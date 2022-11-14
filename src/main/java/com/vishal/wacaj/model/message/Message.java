@@ -14,7 +14,7 @@ import lombok.ToString;
 @Setter
 public class Message {
     Media audio;
-    List<Contact> contacts=new ArrayList<>();
+    List<Contact> contacts = new ArrayList<>();
     Context context;
     Media document;
     Media image;

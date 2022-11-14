@@ -34,6 +34,7 @@ public class MessageController {
     public Object handleIncomingMessages(@RequestBody Payload payload) {
         // todo
         // handle all the cases here for different types of webhook body
+        log.info(payload.toString());
         String changedField = payload.getEntry().get(0).getChanges().get(0).getField();
         if (changedField.equals("messages")) {
             List<Messages> newMessage = payload.getEntry().get(0).getChanges().get(0).getValue().getMessages();
