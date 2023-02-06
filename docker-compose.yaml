@@ -1,0 +1,15 @@
+version: '3'
+services:
+  mongo:
+    image: mongo:latest
+    container_name: docker-mongo
+    ports:
+      - "27017:27017"
+  wacaj_docker:
+    image: wacaj
+    depends_on:
+      - mongo
+    container_name: wacaj
+    build: .
+    ports:
+      - "8080:8080"
